@@ -6,6 +6,7 @@ class Planet {
     public double yyVel;
     public double mass;
     public String imgFileName;
+    static final double G = 6.67e-11;
 
     // constructor
     public Planet(double xP, double yP, double xV,
@@ -26,11 +27,18 @@ class Planet {
         imgFileName = b.imgFileName;
     }
 
+    // calculates the distance between two Bodys
     public double calcDistance(Planet b) {
         double dx = b.xxPos - this.xxPos;
         double dy = b.yyPos - this.yyPos;
 
         return Math.sqrt(dx*dx + dy*dy);
+    }
+
+    // calculates the force exerted on this body by the given body
+    public double calcForceExertedBy(Planet b) {
+        double r = this.calcDistance(b);
+        return (G * this.mass * b.mass) / (r * r);
     }
 
 }
