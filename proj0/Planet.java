@@ -41,4 +41,19 @@ class Planet {
         return (G * this.mass * b.mass) / (r * r);
     }
 
+    // use calcForceExertedBy() to calculate force exerted in the X direction
+    public double calcForceExertedByX(Planet b) {
+        double totalForce = this.calcForceExertedBy(b);
+        double r = this.calcDistance(b);
+
+        return totalForce * (b.xxPos - this.xxPos) / r;
+    }
+    // use calcForceExertedBy() to calculate force exerted in the Y direction
+    public double calcForceExertedByY(Planet b) {
+        double totalForce = this.calcForceExertedBy(b);
+        double r = this.calcDistance(b);
+
+        return totalForce * (b.yyPos - this.yyPos) / r;
+    }
+
 }
