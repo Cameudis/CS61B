@@ -56,4 +56,12 @@ class Planet {
         return totalForce * (b.yyPos - this.yyPos) / r;
     }
 
+    // update Velocity and Position according to dt, fx and fy
+    public void update(double dt, double fX, double fY){
+        xxVel = xxVel + fX / mass * dt;
+        yyVel = yyVel + fY / mass * dt;
+
+        xxPos = xxPos + xxVel * dt;
+        yyPos = yyPos + yyVel * dt;
+    }
 }
