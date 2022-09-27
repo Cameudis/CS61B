@@ -12,20 +12,56 @@ class NBody {
 
         String filename;
         filename = args[2];
+        In in_file = new In(filename);
 
+        int num = in_file.readInt();
         Planet[] planets = readPlanets(filename);
         double radius = readRadius(filename);
 
         // draw the background
+        StdDraw.enableDoubleBuffering();
+
         StdDraw.setScale(-radius, radius);
         StdDraw.clear();
         StdDraw.picture(0, 0, "images/starfield.jpg");
         StdDraw.show();
 
         // draw the planet
-        for (Planet p : planets) {
-            p.draw();
+        // for (Planet p : planets) {
+        //     p.draw();
+        // }
+
+        for (double t = 0.0; t <= T; t += dt) {
+            double[] xForces = new double[num];
+            double[] yForces = new double[num];
+            for (int i = 0; i < num; i++) {
+                double xForce = 0.0;
+                double yForce = 0.0;
+
+                for (int j = 0; j < num; j++) {
+                    if (j == i) {
+                        continue;
+                    } else {
+                        xForce += planets[i].calcForceExertedByX(planets[j]);
+                        yForce += planets[i].calcForceExertedByY(planets[j]);
+                    }
+                }
+
+                xForces[i] = xForce;
+                yForces[i] = yForce;
+            }
+            for (int i = 0; i < num; i++) {
+                planets[i].update(dt, xForces[i], yForces[i]);
+            }
+
+            StdDraw.picture(0, 0, "images/starfield.jpg");
+            for (Planet p: planets) {
+                p.draw();
+            }
+            StdDraw.show();
+            StdDraw.pause(10);
         }
+
     }
 
     public static double readRadius(String file_name) {
