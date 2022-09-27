@@ -26,11 +26,7 @@ class NBody {
         StdDraw.picture(0, 0, "images/starfield.jpg");
         StdDraw.show();
 
-        // draw the planet
-        // for (Planet p : planets) {
-        //     p.draw();
-        // }
-
+        // animation
         for (double t = 0.0; t <= T; t += dt) {
             double[] xForces = new double[num];
             double[] yForces = new double[num];
@@ -62,6 +58,14 @@ class NBody {
             StdDraw.pause(10);
         }
 
+        // after the animation end
+        StdOut.printf("%d\n", planets.length);
+        StdOut.printf("%.2e\n", radius);
+        for (int i = 0; i < planets.length; i++) {
+            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+                        planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
+                        planets[i].yyVel, planets[i].mass, planets[i].imgFileName);   
+}
     }
 
     public static double readRadius(String file_name) {
