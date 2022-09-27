@@ -1,4 +1,5 @@
-class NBody {
+public class NBody {
+
     public static void main(String args[]) {
         // read data
         if (args.length < 3) {
@@ -95,4 +96,7 @@ class NBody {
 
         return planets;
     }
+
+    public NBody() { ; }
+    
 }

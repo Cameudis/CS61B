@@ -1,4 +1,4 @@
-class Planet {
+public class Planet {
     // instance varibles
     public double xxPos;   // position
     public double yyPos;
@@ -6,7 +6,7 @@ class Planet {
     public double yyVel;
     public double mass;
     public String imgFileName;
-    static final double G = 6.67e-11;
+    private static final double G = 6.67e-11;
 
     // constructor
     public Planet(double xP, double yP, double xV,
@@ -56,18 +56,6 @@ class Planet {
         return totalForce * (b.yyPos - this.yyPos) / r;
     }
 
-    // calculates the force exerted on this body by the given body
-    public double calcNetForceExertedBy(Planet[] planets) {
-        double NetForce = 0.0;
-        for (Planet p: planets) {
-            if (this.equals(p)) {
-				continue;	
-			}
-            double r = this.calcDistance(p);
-            NetForce += (G * this.mass * p.mass) / (r * r);
-        }
-        return NetForce;
-    }
 
     // use calcForceExertedBy() to calculate force exerted in the X direction
     public double calcNetForceExertedByX(Planet[] planets) {
