@@ -23,7 +23,9 @@ class NBody {
         StdDraw.show();
 
         // draw the planet
-        planets[0].draw();
+        for (Planet p : planets) {
+            p.draw();
+        }
     }
 
     public static double readRadius(String file_name) {
