@@ -56,6 +56,49 @@ class Planet {
         return totalForce * (b.yyPos - this.yyPos) / r;
     }
 
+    // calculates the force exerted on this body by the given body
+    public double calcNetForceExertedBy(Planet[] planets) {
+        double NetForce = 0.0;
+        for (Planet p: planets) {
+            if (this.equals(p)) {
+				continue;	
+			}
+            double r = this.calcDistance(p);
+            NetForce += (G * this.mass * p.mass) / (r * r);
+        }
+        return NetForce;
+    }
+
+    // use calcForceExertedBy() to calculate force exerted in the X direction
+    public double calcNetForceExertedByX(Planet[] planets) {
+        double totalForceX = 0.0;
+        for (Planet p: planets) {
+            if (this.equals(p)) {
+				continue;	
+			}
+            double f = this.calcForceExertedBy(p);
+            double r = this.calcDistance(p);
+            totalForceX += f * (p.xxPos - this.xxPos) / r;
+        }
+
+        return totalForceX;
+    }
+    // use calcForceExertedBy() to calculate force exerted in the Y direction
+    public double calcNetForceExertedByY(Planet[] planets) {
+        double totalForceY = 0.0;
+        for (Planet p: planets) {
+            if (this.equals(p)) {
+				continue;	
+			}
+            double f = this.calcForceExertedBy(p);
+            double r = this.calcDistance(p);
+            totalForceY += f * (p.yyPos - this.yyPos) / r;
+        }
+
+        return totalForceY;
+    }
+
+
     // update Velocity and Position according to dt, fx and fy
     public void update(double dt, double fX, double fY){
         xxVel = xxVel + fX / mass * dt;
